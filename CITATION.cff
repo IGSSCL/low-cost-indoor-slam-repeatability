@@ -1,0 +1,91 @@
+cff-version: 1.2.0
+title: >-
+  Low-Cost 3D Mapping in Single- and Multi-Level Indoor Environments:
+  code and data
+message: >-
+  If you use this material, please cite both the article and this
+  archived record.
+type: software
+authors:
+  - given-names: José
+    family-names: Gornall
+    email: jose.gornall@pucv.cl
+    affiliation: >-
+      School of Construction and Transportation Engineering,
+      Pontificia Universidad Católica de Valparaíso
+  - given-names: Álvaro
+    family-names: Peña
+    affiliation: >-
+      School of Construction and Transportation Engineering,
+      Pontificia Universidad Católica de Valparaíso
+  - given-names: Hernán
+    family-names: Pinto
+    affiliation: >-
+      School of Construction and Transportation Engineering,
+      Pontificia Universidad Católica de Valparaíso
+  - given-names: Matías Andrés
+    family-names: Toribio Clark
+    affiliation: >-
+      School of Construction and Transportation Engineering,
+      Pontificia Universidad Católica de Valparaíso
+  - given-names: Guillermo Ernesto
+    family-names: Cid Ampuero
+    affiliation: >-
+      School of Construction and Transportation Engineering,
+      Pontificia Universidad Católica de Valparaíso
+  - given-names: Fabiano
+    family-names: Correa
+    affiliation: Escola Politécnica, University of São Paulo
+  - given-names: Jorge
+    family-names: Celades-Martínez
+    affiliation: >-
+      Doctorado en Industria Inteligente,
+      Pontificia Universidad Católica de Valparaíso
+  - given-names: José
+    family-names: García
+    email: jose.garcia@pucv.cl
+    affiliation: >-
+      School of Construction and Transportation Engineering,
+      Pontificia Universidad Católica de Valparaíso
+repository-code: 'REPLACE WITH THE REPOSITORY URL'
+license: MIT
+version: 1.0.0
+date-released: '2026-08-30'
+keywords:
+  - SLAM
+  - LiDAR-inertial odometry
+  - indoor mapping
+  - point cloud
+  - as-built documentation
+  - scan-to-BIM
+  - multicriteria decision analysis
+abstract: >-
+  Evaluation pipeline, analysis scripts and run-wise results for a
+  comparison of six open LiDAR-inertial SLAM algorithms over 25
+  repeated indoor captures of two scenarios, against a terrestrial
+  laser scanning reference.
+preferred-citation:
+  type: article
+  title: >-
+    Low-Cost 3D Mapping in Single- and Multi-Level Indoor Environments:
+    A Multicriteria Evaluation of LiDAR-Inertial SLAM Algorithms
+  authors:
+    - given-names: José
+      family-names: Gornall
+    - given-names: Álvaro
+      family-names: Peña
+    - given-names: Hernán
+      family-names: Pinto
+    - given-names: Matías Andrés
+      family-names: Toribio Clark
+    - given-names: Guillermo Ernesto
+      family-names: Cid Ampuero
+    - given-names: Fabiano
+      family-names: Correa
+    - given-names: Jorge
+      family-names: Celades-Martínez
+    - given-names: José
+      family-names: García
+  journal: Journal of Building Engineering
+  year: 2026
+  doi: 'REPLACE WITH THE ARTICLE DOI ONCE ACCEPTED'

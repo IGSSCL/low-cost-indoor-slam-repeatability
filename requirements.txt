@@ -1,0 +1,9 @@
+# Analisis y figuras. Versiones fijadas a las usadas para producir los resultados
+# publicados. Python 3.10 o superior.
+#
+# El pipeline (src/pipeline/) no necesita nada mas: lee los PCD con un lector propio
+# y hace el registro con numpy y scipy, sin open3d ni PCL.
+numpy==2.2.6
+scipy==1.15.3
+matplotlib==3.10.9
+pandas==2.3.3

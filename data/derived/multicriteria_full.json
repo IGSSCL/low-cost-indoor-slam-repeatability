@@ -1,0 +1,166 @@
+{
+ "por_exp": {
+  "EXP1": {
+   "R": {
+    "POINT-LIO": 0.999,
+    "FAST-LIO2": 0.989,
+    "HDMapping-LIO": 0.994,
+    "D-LIO": 0.996,
+    "LIO-LIVOX": 0.978,
+    "KISS-ICP": 0.0
+   },
+   "Q": {
+    "POINT-LIO": 0.926,
+    "FAST-LIO2": 0.695,
+    "HDMapping-LIO": 0.865,
+    "D-LIO": 0.408,
+    "LIO-LIVOX": 0.707,
+    "KISS-ICP": 0.229
+   },
+   "C": {
+    "POINT-LIO": 0.908,
+    "FAST-LIO2": 0.886,
+    "HDMapping-LIO": 0.297,
+    "D-LIO": 0.62,
+    "LIO-LIVOX": 0.538,
+    "KISS-ICP": 0.961
+   }
+  },
+  "EXP2": {
+   "R": {
+    "POINT-LIO": 0.951,
+    "FAST-LIO2": 0.659,
+    "HDMapping-LIO": 0.847,
+    "D-LIO": 0.844,
+    "LIO-LIVOX": 0.378,
+    "KISS-ICP": 0.106
+   },
+   "Q": {
+    "POINT-LIO": 0.866,
+    "FAST-LIO2": 0.581,
+    "HDMapping-LIO": 1.0,
+    "D-LIO": 0.409,
+    "LIO-LIVOX": 0.348,
+    "KISS-ICP": 0.085
+   },
+   "C": {
+    "POINT-LIO": 0.887,
+    "FAST-LIO2": 0.933,
+    "HDMapping-LIO": 0.332,
+    "D-LIO": 0.596,
+    "LIO-LIVOX": 0.527,
+    "KISS-ICP": 0.937
+   }
+  }
+ },
+ "agregado": {
+  "R": {
+   "POINT-LIO": 0.975,
+   "FAST-LIO2": 0.824,
+   "HDMapping-LIO": 0.921,
+   "D-LIO": 0.92,
+   "LIO-LIVOX": 0.678,
+   "KISS-ICP": 0.053
+  },
+  "Q": {
+   "POINT-LIO": 0.896,
+   "FAST-LIO2": 0.638,
+   "HDMapping-LIO": 0.932,
+   "D-LIO": 0.409,
+   "LIO-LIVOX": 0.528,
+   "KISS-ICP": 0.157
+  },
+  "C": {
+   "POINT-LIO": 0.897,
+   "FAST-LIO2": 0.91,
+   "HDMapping-LIO": 0.315,
+   "D-LIO": 0.608,
+   "LIO-LIVOX": 0.532,
+   "KISS-ICP": 0.949
+  }
+ },
+ "Sa": {
+  "POINT-LIO": 0.92,
+  "FAST-LIO2": 0.748,
+  "HDMapping-LIO": 0.805,
+  "D-LIO": 0.602,
+  "LIO-LIVOX": 0.574,
+  "KISS-ICP": 0.284
+ },
+ "TOPSIS": {
+  "POINT-LIO": 0.956,
+  "FAST-LIO2": 0.681,
+  "HDMapping-LIO": 0.797,
+  "D-LIO": 0.485,
+  "LIO-LIVOX": 0.518,
+  "KISS-ICP": 0.199
+ },
+ "VIKOR": {
+  "POINT-LIO": 0.0,
+  "FAST-LIO2": 0.313,
+  "HDMapping-LIO": 0.302,
+  "D-LIO": 0.608,
+  "LIO-LIVOX": 0.545,
+  "KISS-ICP": 1.0
+ },
+ "SR_exp2": {
+  "POINT-LIO": 0.9167,
+  "FAST-LIO2": 1.0,
+  "HDMapping-LIO": 1.0,
+  "D-LIO": 1.0,
+  "LIO-LIVOX": 0.8333,
+  "KISS-ICP": 1.0
+ },
+ "escenarios": {
+  "Base": {
+   "POINT-LIO": 0.92,
+   "FAST-LIO2": 0.748,
+   "HDMapping-LIO": 0.805,
+   "D-LIO": 0.602,
+   "LIO-LIVOX": 0.574,
+   "KISS-ICP": 0.284
+  },
+  "Uniform": {
+   "POINT-LIO": 0.923,
+   "FAST-LIO2": 0.791,
+   "HDMapping-LIO": 0.723,
+   "D-LIO": 0.645,
+   "LIO-LIVOX": 0.579,
+   "KISS-ICP": 0.386
+  },
+  "Balanced": {
+   "POINT-LIO": 0.928,
+   "FAST-LIO2": 0.767,
+   "HDMapping-LIO": 0.804,
+   "D-LIO": 0.653,
+   "LIO-LIVOX": 0.589,
+   "KISS-ICP": 0.274
+  },
+  "Efficiency": {
+   "POINT-LIO": 0.92,
+   "FAST-LIO2": 0.802,
+   "HDMapping-LIO": 0.682,
+   "D-LIO": 0.642,
+   "LIO-LIVOX": 0.575,
+   "KISS-ICP": 0.443
+  }
+ },
+ "Sa_por_exp": {
+  "EXP1": {
+   "POINT-LIO": 0.944,
+   "FAST-LIO2": 0.822,
+   "HDMapping-LIO": 0.79,
+   "D-LIO": 0.627,
+   "LIO-LIVOX": 0.754,
+   "KISS-ICP": 0.307
+  },
+  "EXP2": {
+   "POINT-LIO": 0.896,
+   "FAST-LIO2": 0.675,
+   "HDMapping-LIO": 0.821,
+   "D-LIO": 0.577,
+   "LIO-LIVOX": 0.393,
+   "KISS-ICP": 0.262
+  }
+ }
+}
