@@ -1,43 +1,64 @@
-# Container images
+# Container image
 
-Each algorithm ran in its own container on Ubuntu 24.04 with ROS 2 Jazzy, **CPU only**.
-No GPU is used at any stage, so the evaluation host needs nothing beyond Docker.
+Of the six algorithms, only **LIO-LIVOX** runs in a Docker container; the other five
+(FAST-LIO2, POINT-LIO, KISS-ICP, D-LIO, HDMapping-LIO) run natively in the ROS 2 Jazzy
+workspace described in `algorithm-parameters.md`. An earlier draft of this file assumed
+every algorithm ran in its own container; that was corrected on 2 September 2026
+(ICT44/ICT45) after auditing the actual processing script (`procesar_mapa.sh`) against a
+fully documented, previously processed run.
 
-## Why digests and not tags
+LIO-LIVOX's reference implementation targets ROS 1, which is why it alone runs isolated
+from the native ROS 2 Jazzy environment, in a Docker image built on Ubuntu with
+ROS 1 Noetic.
+
+## Why a digest and not a tag
 
 An image tag is mutable: `latest`, or even a version tag, can be repointed at a different
 image after publication, and a reader who pulls it a year from now may get something that
-is not what produced these results. The `sha256` digest is immutable and is what the
-table below must record.
+is not what produced these results. The `sha256` digest is immutable and is what matters
+for reproducibility.
 
-Pull by digest, not by tag:
+The `slam-liolivox:noetic` image used here was built locally and was never pushed to a
+registry, so it does not expose a registry `RepoDigest` — the value below is the local
+Docker image ID (`docker inspect --format='{{.Id}}'`), not a pullable registry digest.
+Anyone reproducing this pipeline from scratch should expect to rebuild the image from
+`github.com/Livox-SDK/LIO-Livox` at the commit below rather than pull it.
 
-```bash
-docker pull <repository>@sha256:<digest>
-```
+## Image used
 
-## Images used
-
-> **To be completed before deposit.** Run `record-digests.sh` on the machine where the
-> images live and paste its output here. The digests are not recoverable afterwards if
-> the images are deleted, so this is the one item in the repository that must be filled
-> in from the original environment.
-
-| Algorithm | Image | Tag | Digest (`sha256:`) |
+| Algorithm | Image | Local image ID (`sha256:`) | Registry digest |
 |---|---|---|---|
-| FAST-LIO2 | | | |
-| POINT-LIO | | | |
-| D-LIO | | | |
-| HDMapping-LIO | | | |
-| LIO-LIVOX | | | |
-| KISS-ICP | | | |
+| LIO-LIVOX | `slam-liolivox:noetic` | `b5e5ccad0d5ed92c56c178fc5f73af00a76c7d81d48754f311d227db1596d8a2` | Not published; local build only |
+
+Repository and commit used inside this image are recorded in `algorithm-parameters.md`.
+Its configuration files are `algorithm-configs/lio-livox_runtime_script.sh` (launch and
+capture orchestration) and `docker-image-configs/lio-livox_mid360_image.yaml` (LIO-LIVOX
+algorithm parameters).
+
+## Docker images present but not used
+
+Three further local images existed on the processing machine at audit time —
+`slam-fastlio:noetic`, `slam-pointlio:noetic` and `slam-dlio:noetic` — built at some
+earlier point while evaluating a Docker-based approach for those algorithms. They are
+**not invoked** by the current `procesar_mapa.sh` and did not produce any of the results
+reported in the article; they are listed here only so a reader auditing the machine does
+not mistake them for part of the pipeline.
+
+| Image | Local image ID (`sha256:`) |
+|---|---|
+| `slam-fastlio:noetic` | `070df2095763f74221b61608e7c8e922bc5aa7dec7a84a47d17d26e0e2adc2af` |
+| `slam-pointlio:noetic` | `94318dc3c306f90dcef6bb8caa3b1db2d481506d729b3142454d9d06b18bf4ea` |
+| `slam-dlio:noetic` | `54b85cf50544f6173539961b5048792ed1c3403df7493252f950801df9663b32` |
+
+No local Docker image was found for KISS-ICP or HDMapping-LIO at any point.
 
 ## Host
 
 | | |
 |---|---|
-| Operating system | Ubuntu 24.04 LTS |
-| Middleware | ROS 2 Jazzy |
+| Operating system | Ubuntu 24.04.4 LTS |
+| Middleware (native algorithms) | ROS 2 Jazzy |
+| Middleware (LIO-LIVOX container) | ROS 1 Noetic |
 | Container runtime | Docker |
 | Compute | CPU only, no GPU |
 | Sensor | Livox Mid-360 with its internal IMU, on a handheld tripod tilted forward |

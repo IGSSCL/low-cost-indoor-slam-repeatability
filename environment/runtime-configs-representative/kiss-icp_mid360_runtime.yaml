@@ -1,0 +1,17 @@
+kiss_icp_node:
+    ros__parameters:
+        pcd_save_path: "/home/ltdi/procesamiento_mapas/resultados/KISS-ICP/medicion_20260618_151921_0/mapa_KISS-ICP.pcd"
+        data:
+            deskew: true
+            max_range: 30.0
+            min_range: 0.8
+        mapping:
+            voxel_size: 0.30
+            max_points_per_voxel: 20
+        adaptive_threshold:
+            initial_threshold: 0.8
+            min_motion_th: 0.05
+        registration:
+            max_num_iterations: 500
+            convergence_criterion: 0.0001
+            max_num_threads: 0

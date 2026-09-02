@@ -1,0 +1,19 @@
+/**:
+  ros__parameters:
+    odom/imu/approximateGravity: true
+    odom/imu/calibration/gyro: true
+    odom/imu/calibration/accel: true
+    odom/imu/calibration/time: 3.0
+    odom/computeTimeOffset: true
+    odom/preprocessing/voxelFilter/res: 0.1
+    odom/keyframe/threshD: 0.2
+    odom/keyframe/threshR: 15.0
+    map/sparse/leafSize: 0.1
+    extrinsics/baselink2imu/t: [ 0.011, 0.02329, -0.04412 ]
+    extrinsics/baselink2imu/R: [ 1., 0., 0.,
+                                 0., 1., 0.,
+                                 0., 0., 1. ]
+    extrinsics/baselink2lidar/t: [ 0., 0., 0. ]
+    extrinsics/baselink2lidar/R: [ 1., 0., 0.,
+                                   0., 1., 0.,
+                                   0., 0., 1. ]

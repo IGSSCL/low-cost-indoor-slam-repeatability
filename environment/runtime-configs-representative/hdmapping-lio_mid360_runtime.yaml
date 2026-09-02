@@ -1,0 +1,25 @@
+hdmapping_lio_node:
+  ros__parameters:
+    imu_topic: "/hdmapping/imu"
+    lidar_topic: "/hdmapping/pointcloud"
+    odom_frame: "odom"
+    base_frame: "base_link"
+    pcd_save_path: "/home/ltdi/procesamiento_mapas/resultados/HDMapping-LIO/medicion_20260618_151921_0/mapa_HDMapping-LIO.pcd"
+    map_publish_rate: 0.0
+    
+    filter_threshold_xy_inner: 0.3
+    filter_threshold_xy_outer: 70.0
+    decimation: 0.03
+    ahrs_convention: "NWU"
+    ahrs_gain: 0.5
+    
+    nr_iter: 1000
+    real_time_threshold_seconds: 10.0
+    threshold_nr_poses: 20
+    ndt_resolution_indoor: 0.10
+    ndt_resolution_outdoor: 0.30
+    sliding_window_trajectory_length_threshold: 200.0
+    max_distance_lidar: 70.0
+    
+    motion_model_sigma_xyz: 0.0005
+    motion_model_sigma_omfika: 0.01
