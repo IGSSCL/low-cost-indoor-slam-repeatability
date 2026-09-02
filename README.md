@@ -1,8 +1,7 @@
-# Low-Cost 3D Mapping in Single- and Multi-Level Indoor Environments
+# Repeatability of Low-Cost Indoor 3D Mapping
 
-Code and data for the article *Low-Cost 3D Mapping in Single- and Multi-Level Indoor
-Environments: A Multicriteria Evaluation of LiDAR–Inertial SLAM Algorithms*, submitted
-to the *Journal of Building Engineering*.
+Code and data for the article *Repeatability of Low-Cost Indoor 3D Mapping: A TLS-Referenced Evaluation of Six LiDAR Odometry and Mapping Algorithms in Single- and Multi-Level Environments*, submitted to the *Journal of Building
+Engineering*.
 
 Six open LiDAR–inertial SLAM algorithms — FAST-LIO2, POINT-LIO, D-LIO, HDMapping-LIO,
 LIO-LIVOX and the LiDAR-only baseline KISS-ICP — were run on 25 repeated handheld
@@ -20,8 +19,8 @@ tables in `data/`, which are included in full.
 ## Quick start
 
 ```bash
-git clone <repository URL>
-cd <repository>
+git clone https://github.com/IGSSCL/low-cost-indoor-slam-repeatability.git
+cd low-cost-indoor-slam-repeatability
 python -m venv .venv && . .venv/bin/activate     # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 

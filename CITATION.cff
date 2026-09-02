@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: >-
-  Low-Cost 3D Mapping in Single- and Multi-Level Indoor Environments:
+  Repeatability of Low-Cost Indoor 3D Mapping: A TLS-Referenced Evaluation of Six LiDAR Odometry and Mapping Algorithms in Single- and Multi-Level Environments:
   code and data
 message: >-
   If you use this material, please cite both the article and this
@@ -47,28 +47,27 @@ authors:
     affiliation: >-
       School of Construction and Transportation Engineering,
       Pontificia Universidad Católica de Valparaíso
-repository-code: 'REPLACE WITH THE REPOSITORY URL'
+repository-code: 'https://github.com/IGSSCL/low-cost-indoor-slam-repeatability'
 license: MIT
 version: 1.0.0
 date-released: '2026-08-30'
 keywords:
-  - SLAM
-  - LiDAR-inertial odometry
-  - indoor mapping
+  - LiDAR odometry and mapping
+  - repeatability
+  - indoor 3D mapping
   - point cloud
   - as-built documentation
-  - scan-to-BIM
+  - terrestrial laser scanning
   - multicriteria decision analysis
 abstract: >-
   Evaluation pipeline, analysis scripts and run-wise results for a
-  comparison of six open LiDAR-inertial SLAM algorithms over 25
-  repeated indoor captures of two scenarios, against a terrestrial
-  laser scanning reference.
+  repeated-capture, TLS-referenced comparison of six open LiDAR
+  odometry and mapping algorithms over 25 repeated indoor captures of
+  two scenarios.
 preferred-citation:
   type: article
   title: >-
-    Low-Cost 3D Mapping in Single- and Multi-Level Indoor Environments:
-    A Multicriteria Evaluation of LiDAR-Inertial SLAM Algorithms
+    Repeatability of Low-Cost Indoor 3D Mapping: A TLS-Referenced Evaluation of Six LiDAR Odometry and Mapping Algorithms in Single- and Multi-Level Environments
   authors:
     - given-names: José
       family-names: Gornall

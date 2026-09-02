@@ -1,6 +1,6 @@
 {
-  "title": "Low-Cost 3D Mapping in Single- and Multi-Level Indoor Environments: code and data",
-  "description": "<p>Evaluation pipeline, analysis scripts and run-wise results for the article <em>Low-Cost 3D Mapping in Single- and Multi-Level Indoor Environments: A Multicriteria Evaluation of LiDAR&ndash;Inertial SLAM Algorithms</em>, submitted to the <em>Journal of Building Engineering</em>.</p><p>Six open LiDAR&ndash;inertial SLAM algorithms &mdash; FAST-LIO2, POINT-LIO, D-LIO, HDMapping-LIO, LIO-LIVOX and the LiDAR-only baseline KISS-ICP &mdash; were run on 25 repeated handheld captures of two indoor scenarios, and every reconstruction was compared against a terrestrial laser scanning reference. The deposit contains the per-run metric tables behind every table, figure and statistical test in the article and its supplementary material, the rigid transformation of each of the 150 map&ndash;reference pairs with its RMS and inlier fraction, the element-level measurements of surface roughness, wall plumb and slab separation, and the complete code that turns one into the other.</p><p>Everything the article reports can be regenerated from what is deposited here, without access to the raw recordings.</p>",
+  "title": "Repeatability of Low-Cost Indoor 3D Mapping: A TLS-Referenced Evaluation of Six LiDAR Odometry and Mapping Algorithms in Single- and Multi-Level Environments: code and data",
+  "description": "<p>Evaluation pipeline, analysis scripts and run-wise results for the article <em>Repeatability of Low-Cost Indoor 3D Mapping: A TLS-Referenced Evaluation of Six LiDAR Odometry and Mapping Algorithms in Single- and Multi-Level Environments</em>, submitted to the <em>Journal of Building Engineering</em>.</p><p>Six open LiDAR&ndash;inertial SLAM algorithms &mdash; FAST-LIO2, POINT-LIO, D-LIO, HDMapping-LIO, LIO-LIVOX and the LiDAR-only baseline KISS-ICP &mdash; were run on 25 repeated handheld captures of two indoor scenarios, and every reconstruction was compared against a terrestrial laser scanning reference. The deposit contains the per-run metric tables behind every table, figure and statistical test in the article and its supplementary material, the rigid transformation of each of the 150 map&ndash;reference pairs with its RMS and inlier fraction, the element-level measurements of surface roughness, wall plumb and slab separation, and the complete code that turns one into the other.</p><p>Everything the article reports can be regenerated from what is deposited here, without access to the raw recordings.</p>",
   "upload_type": "software",
   "license": "MIT",
   "access_right": "open",
@@ -16,12 +16,11 @@
     {"name": "García, José", "affiliation": "School of Construction and Transportation Engineering, Pontificia Universidad Católica de Valparaíso"}
   ],
   "keywords": [
-    "SLAM",
-    "LiDAR-inertial odometry",
-    "indoor mapping",
+    "LiDAR odometry and mapping",
+    "repeatability",
+    "indoor 3D mapping",
     "point cloud",
     "as-built documentation",
-    "scan-to-BIM",
     "terrestrial laser scanning",
     "multicriteria decision analysis",
     "reproducibility"
