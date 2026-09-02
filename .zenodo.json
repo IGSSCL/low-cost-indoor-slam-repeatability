@@ -25,12 +25,5 @@
     "multicriteria decision analysis",
     "reproducibility"
   ],
-  "related_identifiers": [
-    {
-      "identifier": "REPLACE WITH THE ARTICLE DOI ONCE ACCEPTED",
-      "relation": "isSupplementTo",
-      "scheme": "doi"
-    }
-  ],
   "notes": "Code under the MIT licence; data and derived tables under CC BY 4.0. The SLAM implementations evaluated and any third-party evaluation tool referenced keep their own licences and are not redistributed here."
 }
