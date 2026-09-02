@@ -51,20 +51,20 @@ for i,(e,_,_) in enumerate(EXP):
 
 # (b) cierre de bucle
 ax = axes[1]; barras(ax,'dc')
-ax.set_ylabel('Median final displacement (m)')
-ax.set_title('(b) Loop-closure displacement', fontsize=8.5, color=INK, pad=6)
+ax.set_ylabel('Median return-to-origin displacement (m)')
+ax.set_title('(b) Return-to-origin displacement', fontsize=8.5, color=INK, pad=6)
 
 # (c) rango vertical  <-- panel nuevo
 ax = axes[2]; barras(ax,'dz')
 ax.axhline(DELTA, color=EXP[0][2], linewidth=1.0, linestyle=(0,(3,2)), zorder=2)
-ax.axhline(EP+DELTA, color=EXP[1][2], linewidth=1.0, linestyle=(0,(3,2)), zorder=2)
+ax.axhline(EP, color=EXP[1][2], linewidth=1.0, linestyle=(0,(3,2)), zorder=2)
 ax.set_xlim(-1.62, len(ALG)-0.45)
-ax.text(-1.55, DELTA, 'true\nExp. 1', ha='left', va='center',
+ax.text(-1.55, DELTA, 'hand\nexcursion\nExp. 1', ha='left', va='center',
         fontsize=6.2, color=EXP[0][2], linespacing=1.1, zorder=5)
-ax.text(-1.55, EP+DELTA, 'true\nExp. 2', ha='left', va='center',
+ax.text(-1.55, EP, 'storey\nheight\nExp. 2', ha='left', va='center',
         fontsize=6.2, color=EXP[1][2], linespacing=1.1, zorder=5)
 ax.set_ylabel('Median vertical range of trajectory (m)')
-ax.set_title('(c) Vertical range vs. true value', fontsize=8.5, color=INK, pad=6)
+ax.set_title('(c) Vertical range vs. reference', fontsize=8.5, color=INK, pad=6)
 ax.set_ylim(0.15, 45)
 
 # (d) tasa de exito, desde cero y con IC de Wilson

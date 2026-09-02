@@ -5,7 +5,7 @@ from paths import raiz, repo
 AQUI = raiz()
 ALG=['POINT-LIO','FAST-LIO2','HDMapping-LIO','D-LIO','LIO-LIVOX','KISS-ICP']
 RUNS={'EXP1':[str(i) for i in range(1,14)],'EXP2':[str(i) for i in range(1,13)]}
-EP=3.15
+EP, DELTA = 3.15, 0.25
 M={(r['exp'],r['run'],r['algoritmo'].replace('_Denso','')):r for r in
    map(json.loads,open(os.path.join(AQUI,'resultados_con_filtrado.jsonl'),encoding='utf-8'))}
 T={(x['exp'],x['run'],x['algoritmo']):x for x in
@@ -47,9 +47,18 @@ def Q(e): return sub([nrm([med(e,a,'lim_chamfer_mean_m') for a in ALG],False),
                       nrm([med(e,a,'lim_coverage@0.02') for a in ALG],True),
                       nrm([med(e,a,'error_abs_mediano_m','D') for a in ALG],False)])
 def R(e):
-    c=[nrm([cvL(e,a) for a in ALG],False), nrm([med(e,a,'cierre_m','T') for a in ALG],False),
-       nrm([med(e,a,'v_sd_ms','T') for a in ALG],False)]
-    if e=='EXP2': c.append(nrm([abs(med(e,a,'dZ_m','T')-EP) for a in ALG],False))
+    # Ra recoge solo comportamiento atribuible al algoritmo.
+    #  - Se retiro la dispersion de la velocidad de marcha: se estima de la propia
+    #    trayectoria de cada algoritmo, de modo que mezcla la conducta del operador con
+    #    el ruido de estimacion y el estudio no puede separarlos. Se conserva como
+    #    covariable experimental en el analisis de sensibilidad a la velocidad.
+    #  - El termino vertical entra en AMBOS escenarios. En el multinivel se mide contra
+    #    la altura de entrepiso del TLS (EP); en el monoplanta, contra la excursion
+    #    esperable de la mano (DELTA), porque la ruta no cambia de nivel. El orden
+    #    resultante es insensible a DELTA entre 0 y 1 m.
+    c=[nrm([cvL(e,a) for a in ALG],False),
+       nrm([med(e,a,'cierre_m','T') for a in ALG],False),
+       nrm([abs(med(e,a,'dZ_m','T')-(EP if e=='EXP2' else DELTA)) for a in ALG],False)]
     return sub(c)
 def C(e):
     t=[EFF[e][a][0] for a in ALG]; c=[EFF[e][a][1] for a in ALG]; m=[EFF[e][a][2] for a in ALG]

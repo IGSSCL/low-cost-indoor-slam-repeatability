@@ -10,18 +10,21 @@ Five LiDAR–inertial algorithms and one LiDAR-only baseline. Each is the public
 implementation released by its authors, run unmodified in its own container; only the
 sensor topic, the extrinsics and the export settings were configured.
 
-| Algorithm | Type | Notes |
-|---|---|---|
-| FAST-LIO2 | LiDAR–inertial, ikd-Tree map | |
-| POINT-LIO | LiDAR–inertial, point-wise update | |
-| D-LIO | LiDAR–inertial, truncated distance field | Exports trajectories at ≈101 Hz against 10 Hz for the rest, which is why all lengths are compared after resampling to 10 Hz |
-| HDMapping-LIO | LiDAR–inertial | Highest CPU cost of the set, ≈752 core-seconds |
-| LIO-LIVOX | LiDAR–inertial, tuned for Livox sensors | Largest exported maps |
-| KISS-ICP | LiDAR only, no IMU | Baseline. The only algorithm tuned to reduce drift and the only one with deskewing explicitly confirmed, so its trajectory metrics are obtained under conditions favourable to it |
+| Algorithm | Type | Repository | Commit / release | Config file | Notes |
+|---|---|---|---|---|---|
+| FAST-LIO2 | LiDAR–inertial, ikd-Tree map | `github.com/hku-mars/FAST_LIO` | *pending* | *pending* | |
+| POINT-LIO | LiDAR–inertial, point-wise update | `github.com/hku-mars/Point-LIO` | *pending* | *pending* | |
+| D-LIO | LiDAR–inertial, truncated distance field | `github.com/robotics-upo/D-LIO` | *pending* | *pending* | Exports trajectories at ≈101 Hz against 10 Hz for the rest, which is why all lengths are compared after resampling to 10 Hz |
+| HDMapping-LIO | LiDAR–inertial | `github.com/MapsHD/HDMapping-LIO` | *pending* | *pending* | Highest CPU cost of the set, ≈752 core-seconds |
+| LIO-LIVOX | LiDAR–inertial, tuned for Livox sensors | `github.com/Livox-SDK/LIO-Livox` | *pending* | *pending* | Largest exported maps |
+| KISS-ICP | LiDAR only, no IMU | `github.com/PRBonn/kiss-icp` | *pending* | *pending* | Baseline. The only algorithm tuned to reduce drift and the only one with deskewing explicitly confirmed, so its trajectory metrics are obtained under conditions favourable to it |
 
-> **To be completed before deposit.** For each algorithm, add the repository URL, the
-> commit or release evaluated, and the configuration file used. The container digests go
-> in `docker-images.md`.
+> **To be completed before deposit.** The six repository URLs are filled in (added
+> 1 September 2026, cross-checked against `references.bib`). Still missing, per
+> algorithm: the exact commit or release evaluated, and the configuration file used —
+> both need to be read off the actual container image or local clone, so they wait on
+> access to the machine where the Docker images live (see `docker-images.md`, same
+> blocker as the digests). The container digests go in `docker-images.md`.
 
 ## Sensor and capture
 

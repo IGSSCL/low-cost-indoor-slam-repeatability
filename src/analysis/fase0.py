@@ -21,6 +21,7 @@ os.makedirs(OUT, exist_ok=True)
 
 ALG  = ['POINT-LIO','FAST-LIO2','HDMapping-LIO','D-LIO','LIO-LIVOX','KISS-ICP']
 RUNS = {'EXP1':[str(i) for i in range(1,14)], 'EXP2':[str(i) for i in range(1,13)]}
+L_RUTA = {'EXP1': 88.0, 'EXP2': 114.0}   # longitud de ruta por escenario, en metros
 EP   = 3.15          # entrepiso medido en el TLS
 
 def jl(name):
@@ -307,18 +308,27 @@ W['0e_leaveoneout'] = L
 L = ["# 0f - Velocidad de marcha y calidad del mapa: familia completa (Fase 8)", "",
      "El articulo reporta hoy cuatro algoritmos de un solo experimento, en un parentesis,",
      "sin n, sin p y sin decir sobre que familia se corrigio. Esta es la familia completa.", "",
-     "**Velocidad de consenso.** Para evitar circularidad no se usa la velocidad estimada",
-     "por cada algoritmo (su error es justamente lo que se relaciona con la calidad), sino",
-     "la mediana entre algoritmos para esa corrida.", ""]
+     "**Velocidad cinematica.** v = longitud de ruta / duracion de la captura. La duracion",
+     "es propiedad de la grabacion, no del algoritmo, y la ruta es la misma en todas las",
+     "repeticiones de un escenario, asi que el predictor no contiene ninguna estimacion",
+     "de ningun algoritmo. Spearman es invariante al valor supuesto de la longitud.", ""]
 vcons = {}
 for e in ('EXP1','EXP2'):
     for r in RUNS[e]:
-        v = [T[(e,r,a)]['v_media_ms'] for a in ALG
-             if (e,r,a) in T and ok(e,r,a) and T[(e,r,a)].get('v_media_ms')]
-        if v: vcons[(e,r)] = float(np.median(v))
+        # Velocidad cinematica: v = L_ruta / t. La duracion es una propiedad de la
+        # grabacion y no del algoritmo -- los seis procesan el mismo MCAP y difieren en
+        # ella un CV mediano de 0,49 % --, mientras que la velocidad derivada de cada
+        # trayectoria varia entre algoritmos un 8,9 % mediano. La longitud de ruta es
+        # constante dentro de cada escenario, de modo que el predictor no contiene
+        # ninguna estimacion de ningun algoritmo. Al ser L constante no altera el orden
+        # de las corridas, y Spearman es invariante: el coeficiente no depende de su
+        # valor (verificado con L entre 70 y 130 m: identico al cuarto decimal).
+        d = [T[(e,r,a)]['dur_s'] for a in ALG
+             if (e,r,a) in T and ok(e,r,a) and T[(e,r,a)].get('dur_s')]
+        if d: vcons[(e,r)] = L_RUTA[e] / float(np.median(d))
 rng = [v for v in vcons.values()]
 L += [f"Rango de velocidad de consenso: {min(rng):.2f} - {max(rng):.2f} m/s "
-      f"sobre {len(rng)} corridas.", ""]
+      f"sobre las {len(RUNS['EXP1'])+len(RUNS['EXP2'])} corridas.", ""]
 for kmet, tit in (('lim_chamfer_mean_m','Chamfer'), ('lim_p95_exactitud_m','P95acc')):
     filas, ps = [], []
     for e in ('EXP1','EXP2'):
