@@ -51,6 +51,12 @@ repository-code: 'https://github.com/IGSSCL/low-cost-indoor-slam-repeatability'
 license: MIT
 version: 1.0.0
 date-released: '2026-08-30'
+identifiers:
+  - type: doi
+    value: '10.5281/zenodo.22240589'
+    description: >-
+      This DOI represents the archived snapshot of this software
+      release on Zenodo.
 keywords:
   - LiDAR odometry and mapping
   - repeatability
