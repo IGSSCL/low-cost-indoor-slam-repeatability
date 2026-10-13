@@ -1,6 +1,6 @@
-# Repeatability of Low-Cost Indoor 3D Mapping
+# A TLS-Referenced Methodology for Evaluating Low-Cost Indoor LiDAR Mapping
 
-Code and data for the article *Repeatability of Low-Cost Indoor 3D Mapping: A TLS-Referenced Evaluation of Six LiDAR Odometry and Mapping Algorithms in Single- and Multi-Level Environments*, submitted to the *Journal of Building
+Code and data for the article *A TLS-Referenced Methodology for Evaluating Low-Cost Indoor LiDAR Mapping in Single- and Multi-Level Buildings*, submitted to the *Journal of Building
 Engineering*.
 
 Six open LiDAR–inertial SLAM algorithms — FAST-LIO2, POINT-LIO, D-LIO, HDMapping-LIO,
@@ -25,17 +25,26 @@ python -m venv .venv && . .venv/bin/activate     # Windows: .venv\Scripts\activa
 pip install -r requirements.txt
 
 cd src/analysis
-python -W ignore analisis_filtrado.py       # map quality, Tables 3 and 4
-python -W ignore analisis_dimensional.py    # dimensional verification, Table 5
-python -W ignore analisis_trayectorias.py   # trajectories, Tables S2 and S3
-python -W ignore apendiceA.py               # multicriteria index, Tables 7, S11, S12
-python -W ignore pareadas.py                # pairwise comparisons, Table S16
-python -W ignore fase0.py                   # all recomputations, one report per topic
+python -W ignore analisis_filtrado.py       # filtering diagnostics (Table S1 and Section 3.4)
+python -W ignore analisis_dimensional.py    # dimensional verification, full report (Table 6)
+python -W ignore analisis_trayectorias.py   # trajectory lengths at a common 10 Hz rate (Section 4.2)
+python -W ignore tablas_v2.py               # map quality and dimensional error, Tables 4-6
+python -W ignore apendiceA.py               # multicriteria index, Table 8 and Tables S5, S12
+python -W ignore sensibilidad_qa.py         # reduced Q_a, leave-one-out, redundancy (Section S7)
+python -W ignore suplemento_v2.py           # Table 3 and Tables S1-S3, S5, S12, S14-S19
+python -W ignore pareadas.py                # pairwise comparisons, Table S17
+python -W ignore fase0.py                   # recomputations, one report per topic (S4, S13, S20, S21)
+
+cd ../figures
+python -W ignore fig03_trajectory_repeatability.py   # Figure 3
+python -W ignore fig_acceptance_curves.py            # Figure 6
+python -W ignore fig_quality_cost.py                 # Figure 8
 ```
 
-Outputs are written to `out/`, which is not tracked. Nothing else is needed: the scripts
-read the tables in `data/` and take a few seconds each, except `fase0.py`, which takes
-about a minute.
+Outputs are written to `out/`, which is not tracked; the table scripts print LaTeX rows
+to the console, and the figure scripts write to the directory named by `SLAM_FIGDIR`
+(default: the current one). Nothing else is needed: the scripts read the tables in
+`data/` and take a few seconds each, except `fase0.py`, which takes about a minute.
 
 Reproducing the pipeline **from the point clouds** additionally requires the raw
 reconstructions and the TLS references, which are not in this repository — see
@@ -48,14 +57,17 @@ reconstructions and the TLS references, which are not in this repository — see
 ```
 data/
   runwise/         one row per map–reference pair: 150 pairs, 147 of them valid
-  registration/    the rigid transformation of every pair, with RMS and inlier fraction
-  derived/         quantities computed on the clouds: roughness, plumb, slab separation
+  registration/    the rigid transformation of every pair, and the spatial hold-out check
+  derived/         quantities computed on the clouds: roughness, plumb, slab separation,
+                   output-frame tilt and levelled vertical range
   reference/       geometry of each scenario measured on the TLS
+  v1_unlevelled/   the results of version 1.0, registered without levelling
 src/
   pipeline/        registration, filtering and measurement — reads point clouds
   analysis/        statistics, indices and report generation — reads only data/
   scan2bim/        element-level measurements of Section 4.5 and Supplementary S6
   figures/         figure generation
+  tools/           export_tables.py: regenerates the CSV views of data/ from the .jsonl
 environment/       algorithm parameters and the container images used
 docs/              which script produces which table
 ```
@@ -68,13 +80,20 @@ script that produces it. `data/README.md` is the data dictionary.
 ## Two stages
 
 **The pipeline** (`src/pipeline/`) reads point clouds and writes one JSON line per
-map–reference pair. It registers each SLAM cloud to the TLS reference — centroid
-matching plus a sweep over 24 yaw hypotheses, then multiscale point-to-point ICP at
-correspondence distances of 3.0, 1.0, 0.4 and 0.15 m — voxel-downsamples both clouds to
+map–reference pair. It first **levels** each SLAM map with its own geometry, without
+looking at the reference: the vertical is the direction along which the heights of the
+points concentrate into the sharpest peaks, which floors, ceilings and slabs produce only
+when that direction is the true one (`reg_v2.py`, function `nivelar`). Three of the six
+implementations export their map in the initial sensor frame, tilted by up to about 40°
+from gravity, and a yaw-only coarse search fails on those maps. It then registers the
+levelled cloud to the TLS reference — centroid matching plus a sweep over 24 yaw
+hypotheses, then multiscale point-to-point ICP at correspondence distances of 3.0, 1.0,
+0.4 and 0.15 m (`geo.py`) — voxel-downsamples both clouds to
 1 cm, applies the declared filters, and measures accuracy, completeness and coverage at
 eight tolerances. Random subsampling uses fixed seeds, so the same inputs give the same
 transformation. It is resumable: interrupt it and relaunch, and it continues where it
-stopped.
+stopped. `holdout.py` repeats the registration with 70 % of the scene and measures on the
+remaining 30 %, to check that the registration does not flatter the reported errors.
 
 **The analysis** (`src/analysis/`) reads only the tables in `data/` and produces the
 article's numbers. It needs no point clouds and runs in seconds.
@@ -102,11 +121,13 @@ directly.
 
 ## Software environment
 
-Ubuntu 24.04, ROS 2 Jazzy and Docker, on CPU only — no GPU is used at any stage. Each
-algorithm runs in its own container, so the evaluation host needs nothing beyond Docker.
-The analysis scripts need only Python and the packages in `requirements.txt`.
+Ubuntu 24.04 and ROS 2 Jazzy, on CPU only — no GPU is used at any stage. Five algorithms
+run natively in a ROS 2 Jazzy workspace; LIO-LIVOX, a ROS 1 package, runs in a Docker
+container with ROS Noetic. The analysis scripts need only Python and the packages in
+`requirements.txt`.
 
-`environment/docker-images.md` lists the image of every algorithm. Image tags are
+`environment/algorithm-parameters.md` lists the repository, commit and configuration of
+every algorithm; `environment/docker-images.md` the container image of LIO-LIVOX. Image tags are
 mutable, so that file also records the `sha256` digest of each image, which is not;
 `environment/record-digests.sh` regenerates the table on the machine where the images
 live.

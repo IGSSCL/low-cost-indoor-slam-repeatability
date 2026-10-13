@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: >-
-  Repeatability of Low-Cost Indoor 3D Mapping: A TLS-Referenced Evaluation of Six LiDAR Odometry and Mapping Algorithms in Single- and Multi-Level Environments:
+  A TLS-Referenced Methodology for Evaluating Low-Cost Indoor LiDAR Mapping in Single- and Multi-Level Buildings:
   code and data
 message: >-
   If you use this material, please cite both the article and this
@@ -49,8 +49,8 @@ authors:
       Pontificia Universidad Católica de Valparaíso
 repository-code: 'https://github.com/IGSSCL/low-cost-indoor-slam-repeatability'
 license: MIT
-version: 1.0.0
-date-released: '2026-08-30'
+version: 1.1.0
+date-released: '2026-10-12'
 identifiers:
   - type: doi
     value: '10.5281/zenodo.22240589'
@@ -73,7 +73,7 @@ abstract: >-
 preferred-citation:
   type: article
   title: >-
-    Repeatability of Low-Cost Indoor 3D Mapping: A TLS-Referenced Evaluation of Six LiDAR Odometry and Mapping Algorithms in Single- and Multi-Level Environments
+    A TLS-Referenced Methodology for Evaluating Low-Cost Indoor LiDAR Mapping in Single- and Multi-Level Buildings
   authors:
     - given-names: José
       family-names: Gornall

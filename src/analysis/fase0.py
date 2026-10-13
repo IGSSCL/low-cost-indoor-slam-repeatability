@@ -8,6 +8,12 @@ Uso (desde la carpeta reproceso_geometrico):
 
 Escribe recalculos/0a..0g .md y un recalculos/RESUMEN.md con todo junto.
 Requiere numpy y scipy (ya instalados: numpy 2.2.6, scipy 1.15.3).
+
+Note (version 1.1.0): the tables are recomputed from data/ (levelled registration) and
+are the source of Tables S4, S13, S20 and S21. The explanatory prose of 0e and 0g was
+written for version 1.0: 0e keeps the index formulation of that version (use apendiceA.py
+and sensibilidad_qa.py), and 0g compares the vertical range against 3.15 m without the
+hand excursion.
 """
 import json, os, sys, math, itertools
 import numpy as np

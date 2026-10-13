@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
-"""Figura 3: repetibilidad, robustez y fidelidad altimetrica. Cuatro paneles.
-Datos: resultados_con_filtrado.jsonl + trayectorias.jsonl (medianas run-wise)."""
+"""Figure 3: trajectory repeatability, return-to-origin displacement, levelled vertical range
+and operational success. Four panels. Data: data/runwise (registration v2), via datos_v2.py."""
 import json, math, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-D = json.load(open('/tmp/fig03_datos.json'))
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from datos_v2 import trayectorias
+D = trayectorias()
 ALG = ['POINT-LIO','HDMapping-LIO','FAST-LIO2','D-LIO','LIO-LIVOX','KISS-ICP']
 EXP = [('EXP1','Experiment 1','#0072B2'), ('EXP2','Experiment 2','#D55E00')]
-EP, DELTA = 3.15, 0.25
+EP, DELTA = 3.15 + 0.13, 0.13  # ICT49: marco nivelado
 INK, MUTED, GRID = '#1a1a1a', '#6b6b6b', '#e3e3e1'
 
 def wilson(k, n, z=1.96):
@@ -51,7 +54,7 @@ for i,(e,_,_) in enumerate(EXP):
 
 # (b) cierre de bucle
 ax = axes[1]; barras(ax,'dc')
-ax.set_ylabel('Median return-to-origin displacement (m)')
+ax.set_ylabel('Return-to-origin displacement (m)')
 ax.set_title('(b) Return-to-origin displacement', fontsize=8.5, color=INK, pad=6)
 
 # (c) rango vertical  <-- panel nuevo
@@ -59,13 +62,13 @@ ax = axes[2]; barras(ax,'dz')
 ax.axhline(DELTA, color=EXP[0][2], linewidth=1.0, linestyle=(0,(3,2)), zorder=2)
 ax.axhline(EP, color=EXP[1][2], linewidth=1.0, linestyle=(0,(3,2)), zorder=2)
 ax.set_xlim(-1.62, len(ALG)-0.45)
-ax.text(-1.55, DELTA, 'hand\nexcursion\nExp. 1', ha='left', va='center',
+ax.text(-1.55, DELTA*0.86, 'Exp. 1:\nhand\nexcursion', ha='left', va='top',
         fontsize=6.2, color=EXP[0][2], linespacing=1.1, zorder=5)
-ax.text(-1.55, EP, 'storey\nheight\nExp. 2', ha='left', va='center',
+ax.text(-1.55, EP*1.12, 'Exp. 2: storey\nheight + hand', ha='left', va='bottom',
         fontsize=6.2, color=EXP[1][2], linespacing=1.1, zorder=5)
-ax.set_ylabel('Median vertical range of trajectory (m)')
-ax.set_title('(c) Vertical range vs. reference', fontsize=8.5, color=INK, pad=6)
-ax.set_ylim(0.15, 45)
+ax.set_ylabel('Vertical range of trajectory (m)')
+ax.set_title('(c) Levelled vertical range vs. expected', fontsize=8.5, color=INK, pad=6)
+ax.set_ylim(0.05, 9)
 
 # (d) tasa de exito, desde cero y con IC de Wilson
 ax = axes[3]
@@ -97,5 +100,4 @@ fig.tight_layout(rect=[0,0.045,1,1])
 import os as _os
 _OUT=_os.environ.get('SLAM_FIGDIR','.')
 fig.savefig(_os.path.join(_OUT,'fig03_trajectory_repeatability_v2.pdf'), bbox_inches='tight')
-fig.savefig('/tmp/fig03_v2.png', dpi=190, bbox_inches='tight')
 print("ok")

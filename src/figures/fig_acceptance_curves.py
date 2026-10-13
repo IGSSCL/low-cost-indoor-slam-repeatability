@@ -1,10 +1,16 @@
+"""Acceptance curves: median coverage of the TLS reference against tolerance, by algorithm
+and scenario. Data: data/runwise/map_quality.jsonl (registration v2), via datos_v2.py."""
 import json, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FixedLocator, FixedFormatter
 
 TAUS=[10,20,30,50,75,100,150,200]
-COV=json.load(open('/tmp/cov.json'))
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from datos_v2 import cobertura, TAUS_MM
+assert TAUS == TAUS_MM
+COV=cobertura()
 ALG=['POINT-LIO','FAST-LIO2','HDMapping-LIO','D-LIO','LIO-LIVOX','KISS-ICP']
 # orden de tonos fijo y validado (CVD), asignado a la entidad, no al rango
 COL={'POINT-LIO':'#0072B2','FAST-LIO2':'#D55E00','HDMapping-LIO':'#009E73',
@@ -48,5 +54,4 @@ fig.tight_layout(rect=[0,0.075,1,1])
 import os as _os
 _OUT=_os.environ.get('SLAM_FIGDIR','.')
 fig.savefig(_os.path.join(_OUT,'fig_acceptance_curves.pdf'),bbox_inches='tight')
-fig.savefig('/tmp/curvas.png',dpi=200,bbox_inches='tight')
 print("ok")

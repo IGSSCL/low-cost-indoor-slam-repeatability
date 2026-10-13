@@ -40,22 +40,21 @@ Host environment for the five native algorithms:
 ## Implementations
 
 Each is the public implementation released by its authors (or, where noted, an actively
-maintained ROS 2 port of it), run unmodified; only the sensor topic, the extrinsics and
+maintained ROS 2 port of it), with no change to the algorithmic code (local edits were
+limited to output file names); only the sensor topic, the extrinsics and
 the export settings were configured.
 
 | Algorithm | Type | Repository | Commit | Config file | Notes |
 |---|---|---|---|---|---|
 | FAST-LIO2 | LiDAR–inertial, ikd-Tree map | `github.com/Ericsii/FAST_LIO` | `2fffc570a25d0df172720bac034fbdb6a13d2162` | `algorithm-configs/fast-lio2_mid360_runtime.yaml` | ROS 2 port of the original `hku-mars/FAST_LIO` (cited in the article for the method); required for the native ROS 2 Jazzy workspace |
-| POINT-LIO | LiDAR–inertial, point-wise update | `github.com/alvgaona/point_lio_ros2` | `a9527fe7b3122ae0195cb7192ff9fbb2b2e08338` | `algorithm-configs/point-lio_mid360_source.yaml` | ROS 2 port of the original `hku-mars/Point-LIO` (cited in the article for the method); uncommitted local changes present at audit time, see source snapshot hash below |
-| D-LIO | LiDAR–inertial, direct scan-to-map GICP, keyframe submap | `github.com/vectr-ucla/direct_lidar_inertial_odometry` | `c8acc37100e349d70a9d8432d656cbce7e5072cd` | `algorithm-configs/d-lio_mid360_runtime.yaml` | This is VECTR/UCLA's *Direct LiDAR-Inertial Odometry* (Chen, Nemiroff & Lopez, ICRA 2023). An earlier version of this file pointed to a different, unrelated algorithm that shares the same "D-LIO" name (Universidad Pablo de Olavide's truncated-distance-field method); corrected 2 September 2026 (ICT45) after auditing the actual source tree. Exports trajectories at ≈101 Hz against 10 Hz for the rest, which is why all lengths are compared after resampling to 10 Hz |
+| POINT-LIO | LiDAR–inertial, point-wise update | `github.com/alvgaona/point_lio_ros2` | `a9527fe7b3122ae0195cb7192ff9fbb2b2e08338` | `algorithm-configs/point-lio_mid360_source.yaml` | ROS 2 port of the original `hku-mars/Point-LIO` (cited in the article for the method) |
+| D-LIO | LiDAR–inertial, direct scan-to-map GICP, keyframe submap | `github.com/vectr-ucla/direct_lidar_inertial_odometry` | `c8acc37100e349d70a9d8432d656cbce7e5072cd` | `algorithm-configs/d-lio_mid360_runtime.yaml` | This is VECTR/UCLA's *Direct LiDAR-Inertial Odometry* (Chen, Nemiroff & Lopez, ICRA 2023). An earlier version of this file pointed to a different, unrelated algorithm that shares the same "D-LIO" name (Universidad Pablo de Olavide's truncated-distance-field method); corrected 2 September 2026 (ICT45) after auditing the actual source tree. Exports trajectories at ≈101 Hz against 10 Hz for the rest (three single-floor KISS-ICP runs fall to 5–6.5 Hz), which is why all lengths are compared after resampling to 10 Hz |
 | HDMapping-LIO | LiDAR–inertial | `github.com/MapsHD/HDMapping-LIO` | `0198b8ef0351cd5845900b8e12882034332c52c1` | `algorithm-configs/hdmapping-lio_mid360_runtime.yaml` | Highest CPU cost of the set, ≈752 core-seconds |
 | LIO-LIVOX | LiDAR–inertial, tuned for Livox sensors | `github.com/Livox-SDK/LIO-Livox` | `2296e4bea59bcfec09624a6f052fd6bfbe2b1e6a` | `algorithm-configs/lio-livox_runtime_script.sh`, `docker-image-configs/lio-livox_mid360_image.yaml` | The only algorithm run in Docker (image `slam-liolivox:noetic`, ROS 1 Noetic); see `docker-images.md`. Largest exported maps |
 | KISS-ICP | LiDAR only, no IMU | `github.com/PRBonn/kiss-icp` | `3f08908f45e85c02c98c66d7dc0d45184352d319` | `algorithm-configs/kiss-icp_mid360_runtime.yaml` | Baseline. The only algorithm tuned to reduce drift and the only one with deskewing explicitly confirmed, so its trajectory metrics are obtained under conditions favourable to it |
 
-Uncommitted local changes were present in the native source trees for POINT-LIO (3),
-KISS-ICP (2), D-LIO (1) and HDMapping-LIO (4) at audit time. For those, a SHA256 of the
-local source snapshot (tree without `.git`) is a more faithful identifier than the
-commit alone:
+For each native implementation, the SHA256 of the source tree used for processing (tree
+without `.git`) is recorded alongside the commit:
 
 | Algorithm | Source snapshot SHA256 |
 |---|---|

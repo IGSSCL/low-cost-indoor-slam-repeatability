@@ -5,7 +5,7 @@ from paths import raiz, repo
 AQUI = raiz()
 ALG=['POINT-LIO','FAST-LIO2','HDMapping-LIO','D-LIO','LIO-LIVOX','KISS-ICP']
 RUNS={'EXP1':[str(i) for i in range(1,14)],'EXP2':[str(i) for i in range(1,13)]}
-EP, DELTA = 3.15, 0.25
+EP, DELTA = 3.15, 0.13   # DELTA: excursion of the hand, measured in the levelled frame (registration v2)
 M={(r['exp'],r['run'],r['algoritmo'].replace('_Denso','')):r for r in
    map(json.loads,open(os.path.join(AQUI,'resultados_con_filtrado.jsonl'),encoding='utf-8'))}
 T={(x['exp'],x['run'],x['algoritmo']):x for x in

@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Genera RESULTADOS_TRAYECTORIAS.md: longitud, DeltaZ y velocidad de marcha."""
+"""Genera RESULTADOS_TRAYECTORIAS.md: longitud, DeltaZ y velocidad de marcha.
+
+Note (version 1.1.0): this is the working report of version 1.0. Its tables are recomputed
+from data/ and remain valid for the trajectory lengths and the effect of resampling to
+10 Hz, but its prose paragraphs were written for the unlevelled registration and do not
+describe the levelled vertical ranges. The trajectory tables of the article (Tables 3, S2
+and S3) are produced by suplemento_v2.py."""
 import json,os,numpy as np
 from scipy.stats import spearmanr
 from paths import raiz
